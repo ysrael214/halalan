@@ -18,6 +18,8 @@
  * along with Halalan.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
+
 $error = FALSE;
 // error checking
 if (empty($_POST['first_name']))

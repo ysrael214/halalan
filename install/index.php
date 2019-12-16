@@ -22,6 +22,7 @@
 // yes, that is the only purpose of this
 // so we can put any value here
 define('BASEPATH', '');
+define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 
 require_once('../application/config/database.php');
 
@@ -35,14 +36,15 @@ if (empty($dbdriver) || $dbdriver != 'mysqli')
 else
 {
 	$misconfigured_settings = false;
-	$link = @mysql_connect($hostname, $username, $password);
+
+	$link = @mysqli_connect($hostname, $username, $password);
 	if (!$link)
 	{
 		$misconfigured_settings = true;
 	}
 	else
 	{
-		$db_selected = @mysql_select_db($database, $link);
+		$db_selected = @mysqli_select_db($link, $database);
 		if (!$db_selected)
 		{
 			$misconfigured_settings = true;
@@ -50,9 +52,9 @@ else
 		else
 		{
 			$query = "SELECT * FROM admins";
-			$result = @mysql_query($query);
+			$result = @mysqli_query($query);
 			$test = FALSE;
-			while ($row = @mysql_fetch_array($result))
+			while ($row = @mysqli_fetch_array($result))
 			{
 				if (!empty($row))
 				{

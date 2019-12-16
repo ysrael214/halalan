@@ -25,38 +25,36 @@ if($u == 1) {
 		<td colspan="5" align="center"><em><?php echo e('admin_elections_no_elections'); ?></em></td>
 	</tr>
 	<?php else: ?>
-	<?php $i = 0; ?>
-	<?php foreach ($elections as $election): ?>
-	<tr class="<?php echo ($i % 2 == 0) ? 'odd' : 'even'  ?>">
-		<td align="center">
-			<?php echo $election['id']; ?>
-		</td>
-		<td>
-			<?php if ($election['parent_id'] > 0): ?>
-			&nbsp;&nbsp;
-			<?php endif; ?>
-			<?php echo anchor('admin/elections/edit/' . $election['id'], $election['election']); ?>
-		</td>
-		<td align="center">
-			<?php if ($election['status']): ?>
-				Running (<?php echo anchor('admin/elections/options/status/' . $election['id'], 'stop'); ?>)
-			<?php else: ?>
-				Not Running (<?php echo anchor('admin/elections/options/status/' . $election['id'], 'start'); ?>)
-			<?php endif; ?>
-		</td>
-		<td align="center">
-			<?php if ($election['results']): ?>
-				Available (<?php echo anchor('admin/elections/options/results/' . $election['id'], 'hide'); ?>)
-			<?php else: ?>
-				Not Available (<?php echo anchor('admin/elections/options/results/' . $election['id'], 'show'); ?>)
-			<?php endif; ?>
-		</td>
-		<td align="center">
-			<?php echo anchor('admin/elections/edit/' . $election['id'], img(array('src' => 'public/images/edit.png', 'alt' => e('common_edit'))), 'title="' . e('common_edit') . '"'); ?> |
-			<?php echo anchor('admin/elections/delete/' . $election['id'], img(array('src' => 'public/images/delete.png', 'alt' => e('common_delete'))), 'class="confirmDelete" title="' . e('common_delete') . '"'); ?>
-		</td>
-	</tr>
-	<?php $i = $i + 1; ?>
-	<?php endforeach; ?>
+		<?php foreach ($elections as $i => $election): ?>
+			<tr class="<?php echo ($i % 2 == 0) ? 'odd' : 'even'  ?>">
+				<td align="center">
+					<?php echo $election['id']; ?>
+				</td>
+				<td>
+					<?php if ($election['parent_id'] > 0): ?>
+					&nbsp;&nbsp;
+					<?php endif; ?>
+					<?php echo anchor('admin/elections/edit/' . $election['id'], $election['election']); ?>
+				</td>
+				<td align="center">
+					<?php if ($election['status']): ?>
+						Running (<?php echo anchor('admin/elections/options/status/' . $election['id'], 'stop'); ?>)
+					<?php else: ?>
+						Not Running (<?php echo anchor('admin/elections/options/status/' . $election['id'], 'start'); ?>)
+					<?php endif; ?>
+				</td>
+				<td align="center">
+					<?php if ($election['results']): ?>
+						Available (<?php echo anchor('admin/elections/options/results/' . $election['id'], 'hide'); ?>)
+					<?php else: ?>
+						Not Available (<?php echo anchor('admin/elections/options/results/' . $election['id'], 'show'); ?>)
+					<?php endif; ?>
+				</td>
+				<td align="center">
+					<?php echo anchor('admin/elections/edit/' . $election['id'], img(array('src' => 'public/images/edit.png', 'alt' => e('common_edit'))), 'title="' . e('common_edit') . '"'); ?> |
+					<?php echo anchor('admin/elections/delete/' . $election['id'], img(array('src' => 'public/images/delete.png', 'alt' => e('common_delete'))), 'class="confirmDelete" title="' . e('common_delete') . '"'); ?>
+				</td>
+			</tr>
+		<?php endforeach; ?>
 	<?php endif; ?>
 </table>
